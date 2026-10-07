@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>CMS Business School | Timetable Platform</title>
+    <meta
+      name="description"
+      content="Integrated Timetable Management Platform for CMS Business School, Jain (Deemed-to-be) University, Lalbagh Campus. Committee console, faculty portal and student view."
+    />
+    <meta name="theme-color" content="#FAF8F3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script>
+      // Apply the saved theme before first paint so there is no flash.
+      (function () {
+        var theme = 'light';
+        try {
+          var raw = localStorage.getItem('ttp:ui:v1');
+          var saved = raw ? JSON.parse(raw).theme : null;
+          if (saved === 'light' || saved === 'dark') theme = saved;
+          else if (window.matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark';
+        } catch (e) {
+          /* storage unavailable: fall back to light */
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // #root holds the pre-rendered landing page. Other routes start empty so it never flashes.
+      if (location.pathname !== '/') document.getElementById('root').textContent = '';
+    </script>
+    <noscript>
+      <p style="font-family: system-ui, sans-serif; padding: 24px">
+        The CMS Timetable Platform needs JavaScript enabled to run.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
